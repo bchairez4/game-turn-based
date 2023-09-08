@@ -22,6 +22,14 @@ class Player {
 
             return *this;
         }
+
+        Character getCurrent() const {
+            return current_;
+        }
+
+        void setCurrent(const Character& current) {
+            current_ = current;
+        }
 };
 
 #endif
