@@ -24,6 +24,22 @@ class Battle {
 
             return  *this;
         }
+
+        Player getPlayerOne() const {
+            return one_;
+        }
+
+        Player getPlayerTwo() const {
+            return two_;
+        }
+
+        void setPlayerOne(const Player& one) {
+            one_  = one;
+        }
+
+        void setPlayerTwo(const Player& two) {
+            two_ = two;
+        }
 };
 
 #endif
