@@ -31,6 +31,46 @@ class Character {
 
             return *this;
         }
+
+        std::string getName() const { 
+            return name_; 
+        }
+
+        int getHealth() const { 
+            return health_; 
+        }
+    
+        int getAttack() const { 
+            return attack_; 
+        }
+    
+        int getDefense() const { 
+            return defense_; 
+        }
+
+        int getSpeed() const {
+            return speed_;
+        }
+
+        void setName(const std::string& name) {
+            name_ = name;
+        }
+
+        void setHealth(const int& health) {
+            health_ = health;
+        }
+
+        void setAttack(const int& attack) { 
+            attack_ = attack; 
+        }
+
+        void setDefense(const int& defense) {
+            defense_ = defense;
+        }
+
+        void setSpeed(const int& speed) {
+            speed_ = speed;
+        }
 };
 
 #endif
