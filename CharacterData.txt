@@ -1,0 +1,5 @@
+Gorlock 20 10 5
+Nazthriel 15 15 4
+Zorn 25 5 2
+Skala 10 25 5
+Prew 10 10 10
