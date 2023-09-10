@@ -1,6 +1,7 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
+#include <ctime> 
 #include "Player.h"
 
 class Battle {
@@ -42,7 +43,8 @@ class Battle {
             two_ = two;
         }
 
-        void showMenu() const {
+        void showMenu(const Player& currentPlayer) const {
+            std::cout << currentPlayer.getCurrent().getName() << " turn: " << '\n';
             std::cout << "What would you like to do?" << '\n';
             std::cout << "1) Fight" << '\n';
             std::cout << "2) Defend" << '\n';
@@ -55,19 +57,19 @@ class Battle {
         void start() {
             while (!one_.isDead() || !two_.isDead()) {
                 if (playerOneTurn_) {
-                    mainPhase(one_);
+                    mainPhase(one_, two_);
                 } else {
-                    mainPhase(two_);
+                    mainPhase(two_, one_);
                 }
                 
                 playerOneTurn_ = !playerOneTurn_;
             }
         }
 
-        void mainPhase(const Player& currentPlayer) {
+        void mainPhase(Player& currentPlayer, Player& otherPlayer) {
             char input = ' ';
 
-            showMenu();
+            showMenu(currentPlayer);
 
             std::cin.get(input);
             std::cin.ignore();
@@ -75,13 +77,13 @@ class Battle {
             
             switch(input) {
                 case '1':
-                    attack();
+                    attack(currentPlayer, otherPlayer);
                     break;
                 case '2':
-                    defend();
+                    defend(currentPlayer);
                     break;
                 case '3':
-                    items();
+                    items(currentPlayer);
                     break;
                 case '4':
                     showStats();
@@ -91,11 +93,33 @@ class Battle {
             }
         }
 
-        void attack() {}
+        void attack(const Player& currentPlayer, Player& otherPlayer) {
+            int damageMultiplier = getDamageMultipler();
 
-        void defend() {}
+            int battleDamage = (currentPlayer.calculateAttackPower() * damageMultiplier) - otherPlayer.calculateDefense();
 
-        void items() {}
+            otherPlayer.receiveDamage(battleDamage);
+        }
+
+        int getDamageMultipler() const {
+            int damageMultiplier = 1;
+
+            std::srand(time(0));
+            int crit = 1 + (rand() % 10);
+
+            //Lucky number 7
+            if (crit == 7) {
+                damageMultiplier = 2;
+            }
+
+            return damageMultiplier;
+        }
+
+        void defend(Player& currentPlayer) {
+            //
+        }
+
+        void items(Player& currentPlayer) {}
 
         void showStats() {
             if (playerOneTurn_) {
@@ -104,9 +128,6 @@ class Battle {
                 two_.displayCharacterStats();
             }
         }
-
-        int damageCalculation() {}
-
 };
 
 #endif
