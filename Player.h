@@ -42,6 +42,36 @@ class Player {
         bool isDead() const {
             return (current_.getCurrentHealth() <= 0);
         }
+
+        int calculateAttackPower() const {
+            return current_.getAttack() - calculateLifeForce();
+        }
+
+        int calculateLifeForce() const {
+            int lifeForceDeterioration = 0;
+
+            if (current_.getCurrentHealth() <= 75) {
+                if (current_.getCurrentHealth() <= 50) {
+                    if (current_.getCurrentHealth() <= 4 && current_.getCurrentHealth() >= 1) {
+                        lifeForceDeterioration = 10;
+                        return -(lifeForceDeterioration);
+                    }
+                }
+
+                lifeForceDeterioration = 2;
+                return lifeForceDeterioration;
+            }
+
+            return lifeForceDeterioration;
+        }
+
+        int calculateDefense() const {
+            return current_.getDefense();
+        }
+
+        void receiveDamage(const int damage) {
+            current_.setCurrentHealth(current_.getCurrentHealth() - damage);
+        }
 };
 
 #endif
