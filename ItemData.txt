@@ -1,0 +1,10 @@
+Health 15
+MegaHealth 25
+AttackBoost 10
+DefenseBoost 10
+SpeedBoost 5
+AttackDrop -10
+DefenseDrop -10
+SpeedDrop -5
+PoisonDart -15
+ThrowingKnife -20
