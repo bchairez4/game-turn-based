@@ -3,11 +3,14 @@
 
 #include <ctime>
 #include <iostream>
+#include <vector>
 #include "Character.h"
+#include "Item.h"
 
 class Player {
     private:
         Character current_;
+        std::vector<Item> items_;
     public:
         Player() : current_() {}
 
@@ -42,6 +45,26 @@ class Player {
 
         bool isDead() const {
             return (current_.getCurrentHealth() <= 0);
+        }
+
+        int totalHealth() const {
+            return current_.getHealth();
+        }
+
+        int currentHealth() const {
+            return current_.getCurrentHealth();
+        }
+
+        int attackStat() const {
+            return current_.getAttack();
+        }
+
+        int defenseStat() const {
+            return current_.getDefense();
+        }
+
+        int speedStat() const {
+            return current_.getDefense();
         }
 
         int calculateLifeForce() const {
