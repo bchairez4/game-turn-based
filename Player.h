@@ -4,8 +4,16 @@
 #include <ctime>
 #include <iostream>
 #include <vector>
+
 #include "Character.h"
 #include "Item.h"
+
+enum class Type {
+    Health,
+    Attack,
+    Defense,
+    Speed
+};
 
 class Player {
     private:
@@ -71,6 +79,7 @@ class Player {
             return current_.getDefense();
         }
 
+        // Fatigue mechanic
         int calculateLifeForce() const {
             if (current_.getCurrentHealth() <= 75) {
                 if (current_.getCurrentHealth() <= 50) {
@@ -134,6 +143,30 @@ class Player {
             //Update health
             int updatedHealth = current_.getCurrentHealth() - damageReceived;
             current_.setCurrentHealth(updatedHealth);
+        }
+
+        void useItem(const std::string& itemName, const Type& type) {
+            for (Item& item : items_) {
+                if (itemName == item.getName() && item.getQuantity() > 0) {
+                    switch(type) {
+                        case Type::Health:
+                            current_.setCurrentHealth(current_.getCurrentHealth() + item.getEffect());
+                            break;
+                        case Type::Attack:
+                            current_.setAttack(current_.getAttack() + item.getEffect());
+                            break;
+                        case Type::Defense:
+                            current_.setDefense(current_.getDefense() + item.getEffect());
+                            break;
+                        case Type::Speed:
+                            current_.setSpeed(current_.getSpeed() + item.getEffect());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
         }
 };
 
