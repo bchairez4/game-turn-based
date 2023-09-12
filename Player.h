@@ -47,6 +47,10 @@ class Player {
             return (current_.getCurrentHealth() <= 0);
         }
 
+        std::string name() const {
+            return current_.getName();
+        }
+
         int totalHealth() const {
             return current_.getHealth();
         }
