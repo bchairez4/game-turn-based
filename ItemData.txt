@@ -1,10 +1,10 @@
-Health 15
-MegaHealth 25
-AttackBoost 10
-DefenseBoost 10
-SpeedBoost 5
-AttackDrop -10
-DefenseDrop -10
-SpeedDrop -5
-PoisonDart -15
-ThrowingKnife -20
+Health Health 15 2
+Health MegaHealth 25 1
+Attack AttackBoost 10 2
+Defense DefenseBoost 10 2
+Speed SpeedBoost 5 2
+Attack AttackDrop -10 2
+Defense DefenseDrop -10 2
+Speed SpeedDrop -5 2
+Health PoisonDart -15 2
+Health ThrowingKnife -20 2
