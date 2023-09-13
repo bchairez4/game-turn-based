@@ -8,13 +8,6 @@
 #include "Character.h"
 #include "Item.h"
 
-enum class Type {
-    Health,
-    Attack,
-    Defense,
-    Speed
-};
-
 class Player {
     private:
         Character current_;
