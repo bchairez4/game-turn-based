@@ -3,6 +3,7 @@
 
 #include <string>
 
+#define MIN_ 0
 #define MAX_HEALTH 100
 #define MAX_ATTACK 50
 #define MAX_DEFENSE 75
@@ -18,7 +19,7 @@ class Character {
         int speed_;
     public:
         Character() 
-        : name_("NULL"), health_(0), currentHealth_(0), attack_(0), defense_(0), speed_(0) {}
+        : name_("NULL"), health_(MIN_), currentHealth_(MIN_), attack_(MIN_), defense_(MIN_), speed_(MIN_) {}
 
         Character(const std::string& nm, const int& hp, const int& chp, const int& atk, const int& df, const int& sp)
         : name_(nm), health_(hp), currentHealth_(chp), attack_(atk), defense_(df), speed_(sp) {}
@@ -68,6 +69,11 @@ class Character {
         }
 
         void setHealth(const int& health) {
+            if (health <= MIN_) {
+                health_ = MIN_;
+                return;
+            }
+
             if (health > MAX_HEALTH) {
                 health_ = MAX_HEALTH;
                 return;
@@ -77,6 +83,11 @@ class Character {
         }
 
         void setCurrentHealth(const int& currentHealth) {
+            if (currentHealth <= MIN_) {
+                currentHealth_ = MIN_;
+                return;
+            }
+            
             if (currentHealth > MAX_HEALTH) {
                 currentHealth_ = MAX_HEALTH;
                 return;
@@ -86,8 +97,13 @@ class Character {
         }
 
         void setAttack(const int& attack) { 
+            if (attack <= MIN_) {
+                attack_ = MIN_;
+                return;
+            }
+
             if (attack > MAX_ATTACK) {
-                health_ = MAX_ATTACK;
+                attack_ = MAX_ATTACK;
                 return;
             }
 
@@ -95,8 +111,13 @@ class Character {
         }
 
         void setDefense(const int& defense) {
+            if (defense <= MIN_) {
+                defense_ = MIN_;
+                return;
+            }
+            
             if (defense > MAX_DEFENSE) {
-                health_ = MAX_DEFENSE;
+                defense_ = MAX_DEFENSE;
                 return;
             }
 
@@ -104,6 +125,11 @@ class Character {
         }
 
         void setSpeed(const int& speed) {
+            if (speed <= MIN_) {
+                speed_ = MIN_;
+                return;
+            }
+
             if (speed > MAX_SPEED) {
                 speed_ = MAX_SPEED;
                 return;
