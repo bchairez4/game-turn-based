@@ -138,28 +138,56 @@ class Player {
             current_.setCurrentHealth(updatedHealth);
         }
 
-        void useItem(const std::string& itemName, const Type& type) {
+        void useItem(const std::string& itemName, const Type& type, Player& other) {
             for (Item& item : items_) {
                 if (itemName == item.getName() && item.getQuantity() > 0) {
-                    switch(type) {
-                        case Type::Health:
-                            current_.setCurrentHealth(current_.getCurrentHealth() + item.getEffect());
-                            break;
-                        case Type::Attack:
-                            current_.setAttack(current_.getAttack() + item.getEffect());
-                            break;
-                        case Type::Defense:
-                            current_.setDefense(current_.getDefense() + item.getEffect());
-                            break;
-                        case Type::Speed:
-                            current_.setSpeed(current_.getSpeed() + item.getEffect());
-                            break;
-                        default:
-                            break;
+                    if (item.getEffect() >= 0) {
+                        useItemOnSelf(item, type);
+                    } else {
+                        useItemOnOpponent(item, type, other.current_);
                     }
+
+                    item.setQuantity(item.getQuantity() - 1);
                 }
             }
+        }
 
+        void useItemOnSelf(Item& item, const Type& type) {
+            switch(type) {
+                case Type::Health:
+                    current_.setCurrentHealth(current_.getCurrentHealth() + item.getEffect());
+                    break;
+                case Type::Attack:
+                    current_.setAttack(current_.getAttack() + item.getEffect());
+                    break;
+                case Type::Defense:
+                    current_.setDefense(current_.getDefense() + item.getEffect());
+                    break;
+                case Type::Speed:
+                    current_.setSpeed(current_.getSpeed() + item.getEffect());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void useItemOnOpponent(Item& item, const Type& type, Character& other) {
+            switch(type) {
+                case Type::Health:
+                    other.setCurrentHealth(current_.getCurrentHealth() + item.getEffect());
+                    break;
+                case Type::Attack:
+                    other.setAttack(current_.getAttack() + item.getEffect());
+                    break;
+                case Type::Defense:
+                    other.setDefense(current_.getDefense() + item.getEffect());
+                    break;
+                case Type::Speed:
+                    other.setSpeed(current_.getSpeed() + item.getEffect());
+                    break;
+                default:
+                    break;
+            }
         }
 };
 
