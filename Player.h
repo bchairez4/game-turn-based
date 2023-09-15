@@ -138,13 +138,13 @@ class Player {
             current_.setCurrentHealth(updatedHealth);
         }
 
-        void useItem(const std::string& itemName, const Type& type, Player& other) {
+        void useItem(const std::string& itemName, Player& other) {
             for (Item& item : items_) {
                 if (itemName == item.getName() && item.getQuantity() > 0) {
                     if (item.getEffect() >= 0) {
-                        useItemOnSelf(item, type);
+                        useItemOnSelf(item, item.getType());
                     } else {
-                        useItemOnOpponent(item, type, other.current_);
+                        useItemOnOpponent(item, item.getType(), other.current_);
                     }
 
                     item.setQuantity(item.getQuantity() - 1);
