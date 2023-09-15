@@ -44,10 +44,6 @@ class Player {
             std::cout << "SPEED: " << current_.getSpeed() << '\n';
         }
 
-        bool isDead() const {
-            return (current_.getCurrentHealth() <= 0);
-        }
-
         std::string name() const {
             return current_.getName();
         }
@@ -69,7 +65,11 @@ class Player {
         }
 
         int speedStat() const {
-            return current_.getDefense();
+            return current_.getSpeed();
+        }
+
+        bool isDead() const {
+            return (current_.getCurrentHealth() <= 0);
         }
 
         // Fatigue mechanic
@@ -104,10 +104,6 @@ class Player {
             }
 
             return damageMultiplier;
-        }
-
-        int calculateDefense() const {
-            return current_.getDefense();
         }
 
         void attack(Player& opponent) {
