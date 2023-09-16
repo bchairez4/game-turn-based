@@ -21,8 +21,11 @@ class Character {
         Character() 
         : name_("NULL"), health_(MIN_), currentHealth_(MIN_), attack_(MIN_), defense_(MIN_), speed_(MIN_) {}
 
-        Character(const std::string& nm, const int& hp, const int& chp, const int& atk, const int& df, const int& sp)
-        : name_(nm), health_(hp), currentHealth_(chp), attack_(atk), defense_(df), speed_(sp) {}
+        Character(const std::string& nm, const int& atk, const int& def, const int& sp)
+        : name_(nm), health_(MAX_HEALTH), currentHealth_(MAX_HEALTH), attack_(atk), defense_(def), speed_(sp) {}
+
+        Character(const std::string& nm, const int& hp, const int& chp, const int& atk, const int& def, const int& sp)
+        : name_(nm), health_(hp), currentHealth_(chp), attack_(atk), defense_(def), speed_(sp) {}
 
         Character(const Character& other)
         : name_(other.name_), health_(other.health_), currentHealth_(other.currentHealth_), attack_(other.attack_), defense_(other.defense_), speed_(other.speed_) {}
