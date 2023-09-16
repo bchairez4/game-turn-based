@@ -113,6 +113,10 @@ class Player {
             opponent.receiveDamage(attackDamage);
         }
 
+        bool defend() {
+            current_.setDefense(MAX_DEFENSE);
+        }
+
         void receiveDamage(const int& damage) {
             //Evade chance
             std::srand(time(0));
@@ -123,8 +127,9 @@ class Player {
             }
 
             //Defend
+            bool blocked = false; // is the opponent currently blocking
             int damageReceived = damage - current_.getDefense();
-            if (damageReceived <= 0) {
+            if (damageReceived <= 0 || blocked) {
                 std::cout << "BLOCKED." << '\n';
                 return;
             }
