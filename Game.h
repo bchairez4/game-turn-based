@@ -12,9 +12,11 @@ class Game {
     private:
         Battle battle_;
         std::vector<Character> characterList_;
+        std::vector<Item> itemList_;
     public:
         Game() {
             loadCharacters(CHARACTER_FILE);
+            loadItems(ITEM_FILE);
         }
 
         Game(const Game& other) : battle_(other.battle_) {
@@ -52,7 +54,25 @@ class Game {
             file.close();
         }
 
-        void loadItems(const std::string& itemFile) {}
+        void loadItems(const std::string& itemFile) {
+            std::ifstream file(itemFile, std::ifstream::in);
+
+            if (!file) {
+                return;
+            }
+
+            while (!file.eof()) {
+                std::string type, name = "";
+                int effect, quantity = 0;
+
+                file >> type >> name >> effect >> quantity;
+
+                Item item(type, name, effect, quantity);
+                itemList_.push_back(item);
+            }
+
+            file.close();
+        }
 
         void start() {}
 };
