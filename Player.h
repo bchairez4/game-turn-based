@@ -113,8 +113,8 @@ class Player {
             opponent.receiveDamage(attackDamage);
         }
 
-        bool defend() {
-            current_.setDefense(MAX_DEFENSE);
+        void defend() {
+            current_.setBlock();
         }
 
         void receiveDamage(const int& damage) {
@@ -127,10 +127,11 @@ class Player {
             }
 
             //Defend
-            bool blocked = false; // is the opponent currently blocking
+            bool blocked = current_.isBlocking(); // is the opponent currently blocking
             int damageReceived = damage - current_.getDefense();
             if (damageReceived <= 0 || blocked) {
                 std::cout << "BLOCKED." << '\n';
+                current_.setBlock();    // reset blocking
                 return;
             }
 
