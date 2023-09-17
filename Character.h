@@ -17,18 +17,20 @@ class Character {
         int attack_;
         int defense_;
         int speed_;
+        bool blocking_;
     public:
         Character() 
-        : name_("NULL"), health_(MIN_), currentHealth_(MIN_), attack_(MIN_), defense_(MIN_), speed_(MIN_) {}
+        : name_("NULL"), health_(MIN_), currentHealth_(MIN_), attack_(MIN_), defense_(MIN_), speed_(MIN_), blocking_(false) {}
 
         Character(const std::string& nm, const int& atk, const int& def, const int& sp)
-        : name_(nm), health_(MAX_HEALTH), currentHealth_(MAX_HEALTH), attack_(atk), defense_(def), speed_(sp) {}
+        : name_(nm), health_(MAX_HEALTH), currentHealth_(MAX_HEALTH), attack_(atk), defense_(def), speed_(sp), blocking_(false) {}
 
         Character(const std::string& nm, const int& hp, const int& chp, const int& atk, const int& def, const int& sp)
-        : name_(nm), health_(hp), currentHealth_(chp), attack_(atk), defense_(def), speed_(sp) {}
+        : name_(nm), health_(hp), currentHealth_(chp), attack_(atk), defense_(def), speed_(sp), blocking_(false) {}
 
         Character(const Character& other)
-        : name_(other.name_), health_(other.health_), currentHealth_(other.currentHealth_), attack_(other.attack_), defense_(other.defense_), speed_(other.speed_) {}
+        : name_(other.name_), health_(other.health_), currentHealth_(other.currentHealth_), 
+        attack_(other.attack_), defense_(other.defense_), speed_(other.speed_), blocking_(other.blocking_)  {}
 
         ~Character() {}
 
@@ -39,6 +41,7 @@ class Character {
             attack_ = other.attack_;
             defense_ = other.defense_;
             speed_ = other.speed_;
+            blocking_ = other.blocking_;
 
             return *this;
         }
@@ -65,6 +68,10 @@ class Character {
 
         int getSpeed() const {
             return speed_;
+        }
+
+        bool isBlocking() const {
+            return blocking_;
         }
 
         void setName(const std::string& name) {
@@ -139,6 +146,10 @@ class Character {
             }
 
             speed_ = speed;
+        }
+
+        void setBlock() {
+            blocking_ = !blocking_;
         }
 };
 
