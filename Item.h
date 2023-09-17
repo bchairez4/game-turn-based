@@ -19,6 +19,19 @@ class Item {
     public:
         Item() : type_(Type::Health), name_(""), effect_(0), quantity_(0) {}
 
+        Item(const std::string& type, const std::string& name, const int& effect, const int& quantity) 
+        : name_(name), effect_(effect), quantity_(quantity) {
+            if (type == "Health") {
+                type_ = Type::Health;
+            } else if (type == "Attack") {
+                type_ = Type::Attack;
+            } else if (type == "Defense") {
+                type_ = Type::Defense;
+            } else if (type == "Speed") {
+                type_ = Type::Speed;
+            }
+        }
+
         Item(const Type& type, const std::string& name, const int& effect, const int& quantity)
         : type_(type), name_(name), effect_(effect), quantity_(quantity) {}
         
