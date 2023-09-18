@@ -74,6 +74,22 @@ class Game {
             file.close();
         }
 
+        void showCharacters() const {
+            for (const Character& character : characterList_) {
+                character.displayStats();
+                std::cout << '\n';
+            }
+        }
+
+        Player chooseCharacter(const std::string& selected) {
+            for (const Character& character : characterList_) {
+                if (selected == character.getName()) {
+                    Player player(character, itemList_);
+                    return player;
+                }
+            }
+        }
+
         void start() {}
 };
 
