@@ -50,10 +50,7 @@ class Player {
         }
 
         void displayCharacterStats() const {
-            std::cout << "MAX HEALTH: " << current_.getHealth() << '\n';
-            std::cout << "ATTACK: " << current_.getAttack() << '\n';
-            std::cout << "DEFENSE: " << current_.getDefense() << '\n';
-            std::cout << "SPEED: " << current_.getSpeed() << '\n';
+            current_.displayStats();
         }
 
         std::string name() const {
