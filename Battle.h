@@ -1,7 +1,6 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
-#include <ctime> 
 #include "Player.h"
 
 class Battle {
@@ -35,6 +34,10 @@ class Battle {
             return two_;
         }
 
+        Player getFastest() const {
+            return (one_.speedStat() >= two_.speedStat() ? one_ : two_);
+        }
+
         void setPlayerOne(const Player& one) {
             one_  = one;
         }
@@ -44,7 +47,7 @@ class Battle {
         }
 
         void showMenu(const Player& currentPlayer) const {
-            std::cout << currentPlayer.getCurrent().getName() << " turn: " << '\n';
+            std::cout << currentPlayer.name() << " turn: " << '\n';
             std::cout << "What would you like to do?" << '\n';
             std::cout << "1) Fight" << '\n';
             std::cout << "2) Defend" << '\n';
@@ -67,66 +70,23 @@ class Battle {
         }
 
         void mainPhase(Player& currentPlayer, Player& otherPlayer) {
-            char input = ' ';
-
-            showMenu(currentPlayer);
-
-            std::cin.get(input);
-            std::cin.ignore();
-            std::cout << '\n';
-            
-            switch(input) {
-                case '1':
-                    attack(currentPlayer, otherPlayer);
-                    break;
-                case '2':
-                    defend(currentPlayer);
-                    break;
-                case '3':
-                    items(currentPlayer);
-                    break;
-                case '4':
-                    showStats();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        void attack(const Player& currentPlayer, Player& otherPlayer) {
-            int damageMultiplier = getDamageMultipler();
-
-            int battleDamage = (currentPlayer.calculateAttackPower() * damageMultiplier) - otherPlayer.calculateDefense();
-
-            otherPlayer.receiveDamage(battleDamage);
-        }
-
-        int getDamageMultipler() const {
-            int damageMultiplier = 1;
-
-            std::srand(time(0));
-            int crit = 1 + (rand() % 10);
-
-            //Lucky number 7
-            if (crit == 7) {
-                damageMultiplier = 2;
-            }
-
-            return damageMultiplier;
-        }
-
-        void defend(Player& currentPlayer) {
             //
         }
 
-        void items(Player& currentPlayer) {}
+        void attack(Player& currentPlayer, Player& otherPlayer) {
+            currentPlayer.attack(otherPlayer);
+        }
 
-        void showStats() {
-            if (playerOneTurn_) {
-                one_.displayCharacterStats();
-            } else {
-                two_.displayCharacterStats();
-            }
+        void defend(Player& currentPlayer) {
+            currentPlayer.defend();
+        }
+
+        void items(Player& currentPlayer, Player& otherPlayer, const std::string& itemName) {
+            currentPlayer.useItem(itemName, otherPlayer);
+        }
+
+        void showStats(const Player& currentPlayer) const {
+            currentPlayer.displayCharacterStats();
         }
 };
 
