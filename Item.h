@@ -66,6 +66,11 @@ class Item {
         }
 
         void setQuantity(const int& quantity) {
+            if (quantity < 0) {
+                quantity_ = 0;
+                return;
+            }
+            
             quantity_ = quantity;
         }
 };
