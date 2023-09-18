@@ -18,13 +18,17 @@ class Player {
         Player(const Character& current)
         : current_(current) {}
 
+        Player(const Character& current, const std::vector<Item>& items)
+        : current_(current), items_(items) {}
+
         Player(const Player& other)
-        : current_(other.current_) {}
+        : current_(other.current_), items_(other.items_) {}
 
         ~Player() {}
 
-        Player& operator=(const Player other) {
+        Player& operator=(const Player& other) {
             current_ = other.current_;
+            items_ = other.items_;
 
             return *this;
         }
@@ -33,8 +37,16 @@ class Player {
             return current_;
         }
 
+        std::vector<Item> getItems() const {
+            return items_;
+        }
+
         void setCurrent(const Character& current) {
             current_ = current;
+        }
+
+        void setItems(const std::vector<Item>& items) {
+            items_ = items;
         }
 
         void displayCharacterStats() const {
