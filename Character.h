@@ -151,6 +151,14 @@ class Character {
         void setBlock() {
             blocking_ = !blocking_;
         }
+
+        void displayStats() const {
+            std::cout << "NAME: " << name_ << '\n';
+            std::cout << "MAX HEALTH: " << health_ << '\n';
+            std::cout << "ATTACK: " << attack_ << '\n';
+            std::cout << "DEFENSE: " << defense_ << '\n';
+            std::cout << "SPEED: " << speed_ << '\n';
+        }
 };
 
 #endif
