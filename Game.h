@@ -20,8 +20,12 @@ class Game {
         }
 
         Game(const Game& other) : battle_(other.battle_) {
-            for (const Character& c : other.characterList_) {
-                characterList_.push_back(c);
+            for (const Character& character : other.characterList_) {
+                characterList_.push_back(character);
+            }
+
+            for (const Item& item : other.itemList_) {
+                itemList_.push_back(item);
             }
         }
 
@@ -29,8 +33,12 @@ class Game {
 
         Game& operator=(const Game& other) {
             battle_ = other.battle_;
-            for (const Character& c : other.characterList_) {
-                characterList_.push_back(c);
+            for (const Character& character : other.characterList_) {
+                characterList_.push_back(character);
+            }
+
+            for (const Item& item : other.itemList_) {
+                itemList_.push_back(item);
             }
         }
 
@@ -90,7 +98,10 @@ class Game {
             }
         }
 
-        void start() {}
+        void startBattle(Player& one, Player& two) {
+            Battle battle(one, two);
+            battle.start();
+        }
 };
 
 #endif
