@@ -55,7 +55,6 @@ class Battle {
 
         void showMenu(const Player& currentPlayer) const {
             std::cout << currentPlayer.name() << " turn: " << '\n';
-            std::cout << "What would you like to do?" << '\n';
             std::cout << "1) Fight" << '\n';
             std::cout << "2) Defend" << '\n';
             std::cout << "3) Items" << '\n';
@@ -77,6 +76,7 @@ class Battle {
         }
 
         void mainPhase(Player& currentPlayer, Player& otherPlayer) {
+            showMenu(currentPlayer);
             Action action = getAction();
             std::string itemName = (action == Action::UseItem ? getItemName(currentPlayer) : "");
 
@@ -100,8 +100,21 @@ class Battle {
 
         Action getAction() const {
             Action action;
+            std::string input = "";
 
-            //
+            std::cout << "Enter an action: ";
+            std::getline(std::cin, input);
+            std::cout << '\n';
+
+            if (input == "Attack") {
+                action = Action::Attack;
+            } else if (input == "Defend") {
+                action = Action::Defend;
+            } else if (input == "UseItem") {
+                action = Action::UseItem;
+            } else if (input == "Stats") {
+                action = Action::Stats;
+            }
 
             return action;
         }
