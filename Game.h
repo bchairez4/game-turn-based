@@ -10,7 +10,6 @@
 
 class Game {
     private:
-        Battle battle_;
         std::vector<Character> characterList_;
         std::vector<Item> itemList_;
     public:
@@ -19,7 +18,7 @@ class Game {
             loadItems(ITEM_FILE);
         }
 
-        Game(const Game& other) : battle_(other.battle_) {
+        Game(const Game& other) {
             for (const Character& character : other.characterList_) {
                 characterList_.push_back(character);
             }
@@ -32,7 +31,6 @@ class Game {
         ~Game() {}
 
         Game& operator=(const Game& other) {
-            battle_ = other.battle_;
             for (const Character& character : other.characterList_) {
                 characterList_.push_back(character);
             }
