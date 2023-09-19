@@ -53,6 +53,18 @@ class Player {
             current_.displayStats();
         }
 
+        void displayItems() const {
+            std::cout << "Available Items: " << '\n';
+            
+            for (const Item& item : items_) {
+                if (item.getQuantity() > 0) {
+                    std::cout << "ITEM NAME: " << item.getName() << '\n';
+                    std::cout << "ITEM EFFECT: " << item.getEffect() << '\n';
+                    std::cout << "ITEM QUANTITY: " << item.getQuantity() << '\n';
+                }
+            }
+        }
+
         std::string name() const {
             return current_.getName();
         }
@@ -147,6 +159,16 @@ class Player {
             //Update health
             int updatedHealth = current_.getCurrentHealth() - damageReceived;
             current_.setCurrentHealth(updatedHealth);
+        }
+
+        bool containsItem(const std::string& itemName) const {
+            for (const Item& item : items_) {
+                if (itemName == item.getName() && item.getQuantity() > 0) {
+                    return true;
+                }
+            }
+            
+            return false;
         }
 
         void useItem(const std::string& itemName, Player& other) {
