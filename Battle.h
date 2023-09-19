@@ -3,6 +3,13 @@
 
 #include "Player.h"
 
+enum class Action {
+    Attack, 
+    Defend, 
+    UseItem,
+    Stats
+};
+
 class Battle {
     private:
         bool playerOneTurn_;
@@ -70,7 +77,50 @@ class Battle {
         }
 
         void mainPhase(Player& currentPlayer, Player& otherPlayer) {
+            Action action = getAction();
+            std::string itemName = (action == Action::UseItem ? getItemName(currentPlayer) : "");
+
+            switch(action) {
+                case Action::Attack:
+                    attack(currentPlayer, otherPlayer);
+                    break;
+                case Action::Defend:
+                    defend(currentPlayer);
+                    break;
+                case Action::UseItem:
+                    items(currentPlayer, otherPlayer, itemName);
+                    break;
+                case Action::Stats:
+                    showStats(currentPlayer);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        Action getAction() const {
+            Action action;
+
             //
+
+            return action;
+        }
+
+        std::string getItemName(const Player& currentPlayer) const {
+            currentPlayer.displayItems();
+
+            std::string itemName = "";
+            std::cout << "Enter the name of the item you want to use: ";
+            std::getline(std::cin, itemName);
+            std::cout << '\n';
+
+            while(!currentPlayer.containsItem(itemName)) {
+                std::cout << "Item name not found. Try again: ";
+                std::getline(std::cin, itemName);
+                std::cout << '\n';
+            }
+
+            return itemName;
         }
 
         void attack(Player& currentPlayer, Player& otherPlayer) {
