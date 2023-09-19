@@ -18,6 +18,11 @@ class Battle {
     public:
         Battle() : playerOneTurn_(true), one_(), two_() {}
 
+        Battle(const Player& one, const Player& two)
+        : playerOneTurn_(false), one_(one), two_(two) {
+            playerOneTurn_ = OneIsFaster();
+        }
+
         Battle(const bool& playerOneTurn, const Player& one, const Player& two)
         : playerOneTurn_(playerOneTurn), one_(one), two_(two) {}
 
@@ -41,8 +46,8 @@ class Battle {
             return two_;
         }
 
-        Player getFastest() const {
-            return (one_.speedStat() >= two_.speedStat() ? one_ : two_);
+        bool OneIsFaster() const {
+            return (one_.speedStat() >= two_.speedStat() ? true : false);
         }
 
         void setPlayerOne(const Player& one) {
@@ -73,6 +78,8 @@ class Battle {
                 
                 playerOneTurn_ = !playerOneTurn_;
             }
+
+            displayResults();
         }
 
         void mainPhase(Player& currentPlayer, Player& otherPlayer) {
@@ -150,6 +157,12 @@ class Battle {
 
         void showStats(const Player& currentPlayer) const {
             currentPlayer.displayCharacterStats();
+        }
+
+        void displayResults() const {
+            Player winner = (one_.isDead() ? two_ : one_);
+
+            std::cout << "WINNER! " << winner.name() << '\n';
         }
 };
 
