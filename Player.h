@@ -55,12 +55,12 @@ class Player {
 
         void displayItems() const {
             std::cout << "Available Items: " << '\n';
-            
             for (const Item& item : items_) {
                 if (item.getQuantity() > 0) {
                     std::cout << "ITEM NAME: " << item.getName() << '\n';
                     std::cout << "ITEM EFFECT: " << item.getEffect() << '\n';
                     std::cout << "ITEM QUANTITY: " << item.getQuantity() << '\n';
+                    std::cout << '\n';
                 }
             }
         }
