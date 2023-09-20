@@ -8,9 +8,11 @@ class Menu {
         Game game_;
     public:
         Menu() {
+            displayWelcome();
+
             std::string selected = "";
             game_.showCharacters();
-            
+
             std::cout << "Enter Player one character: ";
             std::getline(std::cin, selected);
             Player one = game_.chooseCharacter(selected);
@@ -30,6 +32,12 @@ class Menu {
             game_ = other.game_;
 
             return *this;
+        }
+
+        void displayWelcome() const {
+            std::cout << "Welcome Fighter!" << '\n';
+            std::cout << "Choose your champion wisely:" << '\n';
+            std::cout << "-----------------------------------------------------------" << '\n';
         }
 };
 
