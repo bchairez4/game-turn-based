@@ -60,10 +60,10 @@ class Battle {
 
         void showMenu(const Player& currentPlayer) const {
             std::cout << currentPlayer.name() << " turn: " << '\n';
-            std::cout << "1) Fight" << '\n';
-            std::cout << "2) Defend" << '\n';
-            std::cout << "3) Items" << '\n';
-            std::cout << "4) Show Stats" << '\n';
+            std::cout << "- Attack" << '\n';
+            std::cout << "- Defend" << '\n';
+            std::cout << "- UseItem" << '\n';
+            std::cout << "- Stats" << '\n';
             std::cout << '\n';
 
         }
