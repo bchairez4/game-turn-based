@@ -38,6 +38,8 @@ class Game {
             for (const Item& item : other.itemList_) {
                 itemList_.push_back(item);
             }
+
+            return *this;
         }
 
         void loadCharacters(const std::string& characterFile) {
