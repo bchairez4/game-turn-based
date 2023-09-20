@@ -84,7 +84,10 @@ class Game {
 
         void showCharacters() const {
             for (const Character& character : characterList_) {
-                character.displayStats();
+                std::cout << "NAME: " << character.getName() << '\n';
+                std::cout << "ATTACK: " << character.getAttack() << '\n';
+                std::cout << "DEFENSE: " << character.getDefense() << '\n';
+                std::cout << "SPEED: " << character.getSpeed() << '\n';
                 std::cout << '\n';
             }
         }
