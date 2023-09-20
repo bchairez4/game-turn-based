@@ -154,6 +154,7 @@ class Character {
 
         void displayStats() const {
             std::cout << "NAME: " << name_ << '\n';
+            std::cout << "CURRENT HEALTH: " << currentHealth_ << '\n';
             std::cout << "MAX HEALTH: " << health_ << '\n';
             std::cout << "ATTACK: " << attack_ << '\n';
             std::cout << "DEFENSE: " << defense_ << '\n';
