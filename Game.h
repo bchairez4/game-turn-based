@@ -96,6 +96,8 @@ class Game {
                     return player;
                 }
             }
+
+            return Player();
         }
 
         void startBattle(Player& one, Player& two) {
