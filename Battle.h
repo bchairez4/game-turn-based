@@ -144,19 +144,30 @@ class Battle {
         }
 
         void attack(Player& currentPlayer, Player& otherPlayer) {
-            currentPlayer.attack(otherPlayer);
+            std::cout << currentPlayer.name() << " attacks " << otherPlayer.name() << "!\n";
+            int damage = currentPlayer.attack(otherPlayer);
+            
+            if (damage > 0) {
+                std::cout << damage << " damage! \n" << '\n';
+            }
         }
 
         void defend(Player& currentPlayer) {
+            std::cout << currentPlayer.name() << " blocks." << '\n';
             currentPlayer.defend();
+            std::cout << '\n';
         }
 
         void items(Player& currentPlayer, Player& otherPlayer, const std::string& itemName) {
+            std::cout <<  currentPlayer.name() << " uses " << itemName << "!\n";
             currentPlayer.useItem(itemName, otherPlayer);
+            std::cout << '\n';
         }
 
         void showStats(const Player& currentPlayer) const {
+            std::cout << "Displaying stats: " << '\n'; 
             currentPlayer.displayCharacterStats();
+            std::cout << '\n';
         }
 
         void displayResults() const {
