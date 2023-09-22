@@ -127,38 +127,41 @@ class Player {
             return damageMultiplier;
         }
 
-        void attack(Player& opponent) {
+        int attack(Player& opponent) {
             int damageMultiplier = getDamageMultipler();
             int attackDamage = (calculateAttackPower() * damageMultiplier);
 
-            opponent.receiveDamage(attackDamage);
+            int damageRecieved = opponent.receiveDamage(attackDamage);
+
+            return damageRecieved;
         }
 
         void defend() {
             current_.setBlock();
         }
 
-        void receiveDamage(const int& damage) {
+        int receiveDamage(const int& damage) {
             //Evade chance
             std::srand(time(0));
             int evade = 1 + (rand() % 10);
             if ((evade % current_.getSpeed()) == 7) {   //Lucky number 7
                 std::cout << "-Evaded!-" << '\n';
-                return;
+                return 0;
             }
 
             //Defend
             bool blocked = current_.isBlocking(); // is the opponent currently blocking
-            int damageReceived = damage - current_.getDefense();
+            int damageReceived = damage - (current_.getDefense())/2;
             if (damageReceived <= 0 || blocked) {
                 std::cout << "BLOCKED." << '\n';
                 current_.setBlock();    // reset blocking
-                return;
+                return 0;
             }
 
             //Update health
             int updatedHealth = current_.getCurrentHealth() - damageReceived;
             current_.setCurrentHealth(updatedHealth);
+            return damageReceived;
         }
 
         bool containsItem(const std::string& itemName) const {
