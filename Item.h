@@ -65,12 +65,16 @@ class Item {
             return quantity_;
         }
 
+        void setEffect(const int& effect) {
+            effect_ = effect;
+        }
+
         void setQuantity(const int& quantity) {
             if (quantity < 0) {
                 quantity_ = 0;
                 return;
             }
-            
+
             quantity_ = quantity;
         }
 };
