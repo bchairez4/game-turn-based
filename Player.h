@@ -145,7 +145,7 @@ class Player {
             std::srand(time(0));
             int evade = 1 + (rand() % 10);
             if ((evade % current_.getSpeed()) == 7) {   //Lucky number 7
-                std::cout << "-Evaded!-" << '\n';
+                std::cout << "-Evaded!- \n" << '\n';
                 return 0;
             }
 
@@ -153,7 +153,7 @@ class Player {
             bool blocked = current_.isBlocking(); // is the opponent currently blocking
             int damageReceived = damage - (current_.getDefense())/2;
             if (damageReceived <= 0 || blocked) {
-                std::cout << "BLOCKED." << '\n';
+                std::cout << "BLOCKED. \n" << '\n';
                 current_.setBlock();    // reset blocking
                 return 0;
             }
