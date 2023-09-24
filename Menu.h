@@ -9,16 +9,12 @@ class Menu {
     public:
         Menu() {
             displayWelcome();
-
-            std::string selected = "";
             game_.showCharacters();
 
-            std::cout << "Enter Player one character: ";
-            std::getline(std::cin, selected);
+            std::string selected = getName(1);
             Player one = game_.chooseCharacter(selected);
 
-            std::cout << "Enter Player two character: ";
-            std::getline(std::cin, selected);
+            selected = getName(2);
             Player two = game_.chooseCharacter(selected);
 
             game_.startBattle(one, two);
@@ -38,6 +34,22 @@ class Menu {
             std::cout << "Welcome Fighter!" << '\n';
             std::cout << "Choose your champion wisely:" << '\n';
             std::cout << "-----------------------------------------------------------" << '\n';
+        }
+
+        std::string getName(const int& playerNumber) {
+            std::string selected = "";
+
+            std::cout << "Enter Player " << playerNumber <<  " Fighter name: ";
+            std::getline(std::cin, selected);
+            std::cout << '\n';
+
+            while(!game_.containsCharacter(selected)) {
+                std::cout << "Fighter name not found. Try again: ";
+                std::getline(std::cin, selected);
+                std::cout << '\n';
+            }
+
+            return selected;
         }
 };
 
