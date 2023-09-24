@@ -42,6 +42,16 @@ class Game {
             return *this;
         }
 
+        bool containsCharacter(const std::string& characterName) const {
+            for (const Character& character : characterList_) {
+                if (characterName == character.getName()) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         void loadCharacters(const std::string& characterFile) {
             std::ifstream file(characterFile, std::ifstream::in);
 
