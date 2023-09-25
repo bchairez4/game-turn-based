@@ -99,6 +99,7 @@ class Battle {
                     break;
                 case Action::Stats:
                     showStats(currentPlayer);
+                    mainPhase(currentPlayer, otherPlayer);
                     break;
                 default:
                     break;
