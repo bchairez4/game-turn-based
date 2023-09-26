@@ -111,6 +111,20 @@ class Battle {
             }
         }
 
+        bool isAnAction(const std::string& input) const {
+            if (input == "Attack") {
+                return true;
+            } else if (input == "Defend") {
+                return true;
+            } else if (input == "UseItem") {
+                return true;
+            } else if (input == "Stats") {
+                return true;
+            }
+
+            return false;
+        }
+
         Action getAction() const {
             Action action;
             std::string input = "";
@@ -118,6 +132,12 @@ class Battle {
             std::cout << "Enter an action: ";
             std::getline(std::cin, input);
             std::cout << '\n';
+
+            while (!isAnAction(input)) {
+                std::cout << "Try again. Enter an action: ";
+                std::getline(std::cin, input);
+                std::cout << '\n';
+            }
 
             if (input == "Attack") {
                 action = Action::Attack;
