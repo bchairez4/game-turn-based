@@ -32,10 +32,15 @@ class Battle {
         ~Battle() {}
 
         Battle& operator=(const Battle& other) {
+            playerOneTurn_ = other.playerOneTurn_;
             one_ = other.one_;
             two_ = other.two_;
 
             return  *this;
+        }
+
+        bool isPlayerOneTurn() const {
+            return playerOneTurn_;
         }
 
         Player getPlayerOne() const {
