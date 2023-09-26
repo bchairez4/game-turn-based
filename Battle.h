@@ -192,6 +192,7 @@ class Battle {
 
         void showStats(const Player& currentPlayer) const {
             std::cout << "Displaying stats: " << '\n'; 
+            std::cout << "--------------------------------------------------------------------" << '\n';
             currentPlayer.displayCharacterStats();
             std::cout << '\n';
         }
