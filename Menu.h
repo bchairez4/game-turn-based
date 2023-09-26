@@ -17,7 +17,7 @@ class Menu {
             selected = getName(2);
             Player two = game_.chooseCharacter(selected);
 
-            game_.startBattle(one, two);
+            game_.startPvPBattle(one, two);
         }
 
         Menu(const Menu& other) : game_(other.game_) {}
