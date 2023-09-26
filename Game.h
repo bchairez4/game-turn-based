@@ -113,7 +113,7 @@ class Game {
             return Player();
         }
 
-        void startBattle(Player& one, Player& two) {
+        void startPvPBattle(Player& one, Player& two) {
             Battle battle(one, two);
             battle.start();
         }
