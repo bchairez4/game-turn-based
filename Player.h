@@ -192,15 +192,19 @@ class Player {
             switch(type) {
                 case Type::Health:
                     current_.setCurrentHealth(current_.getCurrentHealth() + item.getEffect());
+                    std::cout << "Regained " << item.getEffect() << " health." << '\n';
                     break;
                 case Type::Attack:
                     current_.setAttack(current_.getAttack() + item.getEffect());
+                    std::cout << "Attack raised by " << item.getEffect() << " points." << '\n';
                     break;
                 case Type::Defense:
                     current_.setDefense(current_.getDefense() + item.getEffect());
+                    std::cout << "Defense raised by " << item.getEffect() << " points." << '\n';
                     break;
                 case Type::Speed:
                     current_.setSpeed(current_.getSpeed() + item.getEffect());
+                    std::cout << "Speed raised by " << item.getEffect() << " points." << '\n';
                     break;
                 default:
                     break;
@@ -211,15 +215,19 @@ class Player {
             switch(type) {
                 case Type::Health:
                     other.setCurrentHealth(current_.getCurrentHealth() + item.getEffect());
+                    std::cout << -(item.getEffect()) << " damage dealt to " << other.getName() << "." << '\n';
                     break;
                 case Type::Attack:
                     other.setAttack(current_.getAttack() + item.getEffect());
+                    std::cout << other.getName() << " attack lowered by " << -(item.getEffect()) << "." << '\n';
                     break;
                 case Type::Defense:
                     other.setDefense(current_.getDefense() + item.getEffect());
+                    std::cout << other.getName() << " defense lowered by " << -(item.getEffect()) << "." << '\n';
                     break;
                 case Type::Speed:
                     other.setSpeed(current_.getSpeed() + item.getEffect());
+                    std::cout << other.getName() << " speed lowered by " << -(item.getEffect()) << "." << '\n';
                     break;
                 default:
                     break;
