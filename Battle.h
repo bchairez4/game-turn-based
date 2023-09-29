@@ -74,6 +74,9 @@ class Battle {
         }
 
         void start() {
+            one_.reset();
+            two_.reset();
+
             while (!one_.isDead() || !two_.isDead()) {
                 if (playerOneTurn_) {
                     mainPhase(one_, two_);
