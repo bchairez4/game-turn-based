@@ -115,7 +115,14 @@ class Game {
 
         void startPvPBattle(Player& one, Player& two) {
             Battle battle(one, two);
-            battle.start();
+
+            char response = ' ';
+            while (response != 'n') {
+                battle.start();
+                std::cout << "Rematch? (y or n): ";
+                std::cin >> response;
+                std::cin.ignore();
+            }
         }
 };
 
