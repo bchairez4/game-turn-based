@@ -55,6 +55,7 @@ class Player {
 
         void displayItems() const {
             std::cout << "Available Items: " << '\n';
+            std::cout << "--------------------------------------------------------------------" << '\n';
             for (const Item& item : items_) {
                 if (item.getQuantity() > 0) {
                     std::cout << "ITEM NAME: " << item.getName() << '\n';
@@ -232,6 +233,10 @@ class Player {
                 default:
                     break;
             }
+        }
+
+        void reset() {
+            current_.setCurrentHealth(current_.getHealth());
         }
 };
 
