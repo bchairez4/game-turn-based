@@ -18,6 +18,8 @@ class Menu {
             Player two = game_.chooseCharacter(selected);
 
             game_.startPvPBattle(one, two);
+
+            displayFarewell();
         }
 
         Menu(const Menu& other) : game_(other.game_) {}
@@ -34,6 +36,10 @@ class Menu {
             std::cout << "Welcome Fighter!" << '\n';
             std::cout << "Choose your champion wisely:" << '\n';
             std::cout << "-----------------------------------------------------------" << '\n';
+        }
+
+        void displayFarewell() const {
+            std::cout << "Thank you for playing!" << '\n';
         }
 
         std::string getName(const int& playerNumber) {
