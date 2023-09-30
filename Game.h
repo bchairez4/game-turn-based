@@ -119,9 +119,11 @@ class Game {
             char response = ' ';
             while (response != 'n') {
                 battle.start();
+
                 std::cout << "Rematch? (y or n): ";
                 std::cin >> response;
                 std::cin.ignore();
+                std::cout << '\n';
             }
         }
 };
