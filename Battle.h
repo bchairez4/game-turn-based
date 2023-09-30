@@ -203,7 +203,7 @@ class Battle {
         void displayResults() const {
             Player winner = (one_.isDead() ? two_ : one_);
 
-            std::cout << "WINNER! " << winner.name() << '\n';
+            std::cout << "WINNER! " << winner.name() << '\n' << '\n';
         }
 };
 
