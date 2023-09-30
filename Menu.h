@@ -11,13 +11,21 @@ class Menu {
             displayWelcome();
             game_.showCharacters();
 
-            std::string selected = getName(1);
-            Player one = game_.chooseCharacter(selected);
+            char response = ' ';
+            while (response != 'n') {
+                std::string selected = getName(1);
+                Player one = game_.chooseCharacter(selected);
 
-            selected = getName(2);
-            Player two = game_.chooseCharacter(selected);
+                selected = getName(2);
+                Player two = game_.chooseCharacter(selected);
 
-            game_.startPvPBattle(one, two);
+                game_.startPvPBattle(one, two);
+
+                std::cout << "Return to character select? (y or n): ";
+                std::cin >> response;
+                std::cin.ignore();
+                std::cout << '\n';
+            }
 
             displayFarewell();
         }
