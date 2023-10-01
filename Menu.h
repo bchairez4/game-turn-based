@@ -9,10 +9,11 @@ class Menu {
     public:
         Menu() {
             displayWelcome();
-            game_.showCharacters();
 
             char response = ' ';
             while (response != 'n') {
+                game_.showCharacters();
+                
                 std::string selected = getName(1);
                 Player one = game_.chooseCharacter(selected);
 
