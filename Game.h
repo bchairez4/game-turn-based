@@ -118,13 +118,35 @@ class Game {
 
             char response = ' ';
             while (response != 'n') {
-                battle.start();
+                battle.startPvP();
 
                 std::cout << "Rematch? (y or n): ";
                 std::cin >> response;
                 std::cin.ignore();
                 std::cout << '\n';
             }
+        }
+
+        void startPvEBAttle(Player& one) {
+            NPC npc(generateRandomCharacter(), itemList_);
+            Battle battle(one, npc);
+
+            char response = ' ';
+            while (response != 'n') {
+                battle.startPvE();
+
+                std::cout << "Rematch? (y or n): ";
+                std::cin >> response;
+                std::cin.ignore();
+                std::cout << '\n';
+            }
+        }
+
+        Character generateRandomCharacter() const {
+            std::srand(time(0));
+            int characterIndex = (rand() % characterList_.size());
+
+            return characterList_.at(characterIndex);
         }
 };
 
