@@ -1,7 +1,7 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
-#include "Player.h"
+#include "NPC.h"
 
 enum class Action {
     Attack, 
@@ -17,6 +17,10 @@ class Battle {
         Player two_;
     public:
         Battle() : playerOneTurn_(true), one_(), two_() {}
+
+        Battle(const Player& one, const NPC npc) : playerOneTurn_(false), one_(one), two_(npc) {
+            playerOneTurn_ = OneIsFaster();
+        }
 
         Battle(const Player& one, const Player& two)
         : playerOneTurn_(false), one_(one), two_(two) {
@@ -73,15 +77,15 @@ class Battle {
 
         }
 
-        void start() {
+        void startPvE() {
             one_.reset();
             two_.reset();
 
             while (!one_.isDead() && !two_.isDead()) {
                 if (playerOneTurn_) {
-                    mainPhase(one_, two_);
+                    mainPhasePvE(one_, two_);
                 } else {
-                    mainPhase(two_, one_);
+                    mainPhasePvE(two_, one_);
                 }
                 
                 playerOneTurn_ = !playerOneTurn_;
@@ -90,7 +94,47 @@ class Battle {
             displayResults();
         }
 
-        void mainPhase(Player& currentPlayer, Player& otherPlayer) {
+        void startPvP() {
+            one_.reset();
+            two_.reset();
+
+            while (!one_.isDead() && !two_.isDead()) {
+                if (playerOneTurn_) {
+                    mainPhasePvP(one_, two_);
+                } else {
+                    mainPhasePvP(two_, one_);
+                }
+                
+                playerOneTurn_ = !playerOneTurn_;
+            }
+
+            displayResults();
+        }
+
+        void mainPhasePvE(Player& currentPlayer, Player& otherPlayer) {
+            // CPU TURN
+            if (!playerOneTurn_) {
+                Action action = generateRandomAction();
+                std::string itemName = (action == Action::UseItem ? generateRandomItemName(currentPlayer) : "");
+
+                switch(action) {
+                    case Action::Attack:
+                        attack(currentPlayer, otherPlayer);
+                        break;
+                    case Action::Defend:
+                        defend(currentPlayer);
+                        break;
+                    case Action::UseItem:
+                        items(currentPlayer, otherPlayer, generateRandomItemName(currentPlayer));
+                        break;
+                    default:
+                        break;
+                }
+
+                return;
+            }
+            
+            // PLAYER TURN
             showMenu(currentPlayer);
             Action action = getAction();
             std::string itemName = (action == Action::UseItem ? getItemName(currentPlayer) : "");
@@ -107,7 +151,31 @@ class Battle {
                     break;
                 case Action::Stats:
                     showStats(currentPlayer);
-                    mainPhase(currentPlayer, otherPlayer);
+                    mainPhasePvE(currentPlayer, otherPlayer);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void mainPhasePvP(Player& currentPlayer, Player& otherPlayer) {
+            showMenu(currentPlayer);
+            Action action = getAction();
+            std::string itemName = (action == Action::UseItem ? getItemName(currentPlayer) : "");
+
+            switch(action) {
+                case Action::Attack:
+                    attack(currentPlayer, otherPlayer);
+                    break;
+                case Action::Defend:
+                    defend(currentPlayer);
+                    break;
+                case Action::UseItem:
+                    items(currentPlayer, otherPlayer, itemName);
+                    break;
+                case Action::Stats:
+                    showStats(currentPlayer);
+                    mainPhasePvP(currentPlayer, otherPlayer);
                     break;
                 default:
                     break;
@@ -155,6 +223,29 @@ class Battle {
             return action;
         }
 
+        Action generateRandomAction() const {
+            std::srand(time(0));
+            int choice = 1 + (rand() % 3);
+
+            Action action;
+            switch(choice) {
+                case 1: 
+                    action = Action::Attack;
+                    break;
+                case 2:
+                    action = Action::Defend;
+                    break;
+                case 3:
+                    action = Action::UseItem;
+                    break;
+                default:
+                    action = Action::Attack;
+                    break;
+            }
+
+            return action;
+        }
+
         std::string getItemName(const Player& currentPlayer) const {
             currentPlayer.displayItems();
 
@@ -170,6 +261,13 @@ class Battle {
             }
 
             return itemName;
+        }
+
+        std::string generateRandomItemName(const Player& currentPlayer) const {
+            std::srand(time(0));
+            int itemIndex = (rand() % currentPlayer.getItems().size());
+
+            return currentPlayer.getItems().at(itemIndex).getName();
         }
 
         void attack(Player& currentPlayer, Player& otherPlayer) {
