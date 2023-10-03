@@ -24,6 +24,8 @@ class NPC : public Player {
         NPC& operator=(const NPC& other) {
             setCurrent(other.getCurrent());
             setItems(other.getItems());
+
+            return *this;
         }
 };
 
