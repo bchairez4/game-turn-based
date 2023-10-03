@@ -16,7 +16,7 @@ class Menu {
             std::cin >> repsonse;
             std::cin.ignore();
             std::cout << '\n';
-            
+
             switch(repsonse) {
                 case '1':
                     PvE();
@@ -51,7 +51,7 @@ class Menu {
             std::cout << "1) Player vs Enemy (PvE)" << '\n';
             std::cout << "2) Player vs Player (PvP)" << '\n';
 
-            std::cout << "Enter a battle mode number: ";
+            std::cout << "Enter a battle mode number (1 or 2): ";
         }
 
         void displayCharacterSelectWelcome() const {
