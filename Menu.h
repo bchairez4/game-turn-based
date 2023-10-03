@@ -10,22 +10,18 @@ class Menu {
         Menu() {
             displayWelcome();
 
-            char response = ' ';
-            while (response != 'n') {
-                game_.showCharacters();
-                
-                std::string selected = getName(1);
-                Player one = game_.chooseCharacter(selected);
+            displayMenu();
 
-                selected = getName(2);
-                Player two = game_.chooseCharacter(selected);
-
-                game_.startPvPBattle(one, two);
-
-                std::cout << "Return to character select? (y or n): ";
-                std::cin >> response;
-                std::cin.ignore();
-                std::cout << '\n';
+            char repsonse = ' ';
+            switch(repsonse) {
+                case '1':
+                    PvE();
+                    break;
+                case '2':
+                    PvP();
+                    break;
+                default:
+                    break;
             }
 
             displayFarewell();
@@ -42,9 +38,61 @@ class Menu {
         }
 
         void displayWelcome() const {
+            std::cout << "Turn Based Combat Game" << '\n' << '\n';
+        }
+
+        void displayMenu() const {
+            std::cout << "Battle Modes:" << '\n';
+            std::cout << "-----------------------------------------------------------" << '\n';
+            std::cout << "1) Player vs Enemy (PvE)" << '\n';
+            std::cout << "2) Player vs Player (PvP)" << '\n';
+
+            std::cout << "Enter a battle mode number: ";
+        }
+
+        void displayCharacterSelectWelcome() const {
             std::cout << "Welcome Fighter!" << '\n';
             std::cout << "Choose your champion wisely:" << '\n';
             std::cout << "-----------------------------------------------------------" << '\n';
+        }
+
+        void PvE() {
+            char response = ' ';
+            while (response != 'n') {
+                displayCharacterSelectWelcome();
+                game_.showCharacters();
+                
+                std::string selected = getName(1);
+                Player one = game_.chooseCharacter(selected);
+
+                game_.startPvEBAttle(one);
+
+                std::cout << "Return to character select? (y or n): ";
+                std::cin >> response;
+                std::cin.ignore();
+                std::cout << '\n';
+            }
+        }
+
+        void PvP() {
+            char response = ' ';
+            while (response != 'n') {
+                displayCharacterSelectWelcome();
+                game_.showCharacters();
+                
+                std::string selected = getName(1);
+                Player one = game_.chooseCharacter(selected);
+
+                selected = getName(2);
+                Player two = game_.chooseCharacter(selected);
+
+                game_.startPvPBattle(one, two);
+
+                std::cout << "Return to character select? (y or n): ";
+                std::cin >> response;
+                std::cin.ignore();
+                std::cout << '\n';
+            }
         }
 
         void displayFarewell() const {
