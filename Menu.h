@@ -13,6 +13,10 @@ class Menu {
             displayMenu();
 
             char repsonse = ' ';
+            std::cin >> repsonse;
+            std::cin.ignore();
+            std::cout << '\n';
+            
             switch(repsonse) {
                 case '1':
                     PvE();
